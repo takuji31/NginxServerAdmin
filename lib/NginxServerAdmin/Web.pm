@@ -63,6 +63,8 @@ __PACKAGE__->add_trigger(
 
         # Cache control.
         $res->header( 'Cache-Control' => 'private' );
+
+        $c->server_config->save;
     },
 );
 

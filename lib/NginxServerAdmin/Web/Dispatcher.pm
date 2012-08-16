@@ -6,6 +6,9 @@ use Amon2::Web::Dispatcher::Lite;
 
 any '/' => sub {
     my ($c) = @_;
+
+    $c->server_config;
+
     $c->render('index.tt');
 };
 

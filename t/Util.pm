@@ -37,13 +37,4 @@ sub slurp {
     do { local $/; <$fh> };
 }
 
-# initialize database
-use NginxServerAdmin;
-{
-    unlink 'db/test.db' if -f 'db/test.db';
-
-    my $c = NginxServerAdmin->new();
-    $c->setup_schema();
-}
-
 1;

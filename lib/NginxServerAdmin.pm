@@ -4,7 +4,7 @@ use warnings;
 use utf8;
 use parent qw/Amon2/;
 our $VERSION='0.01';
-use 5.008001;
+use 5.010_001;
 
 use NginxServerAdmin::ServerConfig;
 

@@ -14,7 +14,7 @@ use lib File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..', 'lib'));
 use parent qw/Exporter/;
 use Test::More 0.98;
 
-our @EXPORT = qw(slurp bootstrap);
+our @EXPORT = qw(slurp bootstrap clear_config);
 
 {
     # utf8 hack.
@@ -34,7 +34,7 @@ our @EXPORT = qw(slurp bootstrap);
 sub slurp {
     my $fname = shift;
     open my $fh, '<:encoding(UTF-8)', $fname or die "$fname: $!";
-    do { local $/; <$fh> };
+    do { local $/; my $a = <$fh>; close $fh; $a; };
 }
 
 use NginxServerAdmin;
@@ -42,6 +42,13 @@ sub bootstrap(&) {
     my ($code) = @_;
     NginxServerAdmin->bootstrap();
     $code->(Amon2->context());
+}
+
+sub clear_config {
+    my $c = Amon2->context();
+    my $path = $c->server_config->server_conf_path;
+    unlink $path;
+    delete $c->{server_config};
 }
 
 1;

@@ -13,7 +13,7 @@ use Encode;
 
 
 sub server_conf_path {
-    return File::Spec->catfile(Amon2->context()->base_dir, 'server.yaml');
+    return Amon2->context()->config->{server_config_path};
 }
 
 sub new {
